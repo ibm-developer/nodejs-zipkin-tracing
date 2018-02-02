@@ -1,0 +1,39 @@
+replicaCount: 1
+revisionHistoryLimit: 1
+
+image:
+  # If on Bluemix
+  # repository: registry.ng.bluemix.net/the_namespace/pusher
+  # This gets replaced anyway so we can not set it
+  # tag: v1.0.0
+
+  # If on IBM Cloud Private and you've pushed the image already
+  # e.g. with 
+  # export GETTER_LOCATION=mycluster.icp:8500/default/getter && export PUSHER_LOCATION=mycluster.icp:8500/default/pusher
+
+  repository: mycluster.icp:8500/default/pusher
+
+  # If public Docker
+  #repository: my_username/pusher:latest
+
+  pullPolicy: Always
+  resources:
+    requests:
+      cpu: 200m
+      memory: 300Mi
+livenessProbe:
+  initialDelaySeconds: 3000
+  periodSeconds: 1000
+service:
+  name: Node
+  type: NodePort
+  servicePort: 3000
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+    cpu:
+      targetAverageUtilization: 70
+    memory:
+      targetAverageUtilization: 70

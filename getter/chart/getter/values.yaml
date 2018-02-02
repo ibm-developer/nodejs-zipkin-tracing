@@ -1,0 +1,42 @@
+replicaCount: 1
+revisionHistoryLimit: 1
+
+image:
+  # If you pushed to Bluemix
+  # repository: registry.ng.bluemix.net/the_namespace/getter
+
+  # If on IBM Cloud Private and you've pushed the image already
+  # export GETTER_LOCATION=mycluster.icp:8500/default/getter && export PUSHER_LOCATION=mycluster.icp:8500/default/pusher  
+  repository: mycluster.icp:8500/default/getter
+
+  # With a straight helm install we should include a tag too
+  # tag: v1.0.0
+
+  # If public Docker
+  # repository: my_username/getter
+
+  pullPolicy: Always
+
+  resources:
+    requests:
+      cpu: 200m
+      memory: 300Mi
+livenessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+service:
+  name: Node
+  type: NodePort
+  servicePort: 3001
+autoscaling:
+  enabled: true
+  # Only for testing the autoscaling capabilities!
+  # we're wanting 1% CPU/memory usage in this case
+  # so give us plenty of pods
+  minReplicas: 1
+  maxReplicas: 100
+  metrics:
+    cpu:
+      targetAverageUtilization: 1
+    memory:
+      targetAverageUtilization: 1

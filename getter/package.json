@@ -1,0 +1,35 @@
+{
+  "name": "getter",
+  "version": "1.0.0",
+  "description": "A generated Bluemix application",
+  "private": true,
+  "license": "Apache-2.0",
+  "engines": {
+    "node": "^6.9.0"
+  },
+  "scripts": {
+    "start": "USE_ZIPKIN=true node server/getter.js",
+    "debug": "node --debug server/getter.js",
+    "test": "nyc mocha",
+    "build": "npm run build:idt",
+    "idt:build": "node idt.js build",
+    "idt:test": "node idt.js test",
+    "idt:debug": "node idt.js debug",
+    "idt:run": "node idt.js run",
+    "idt:deploy": "node idt.js deploy",
+    "idt:install": "node idt.js install"
+  },
+  "dependencies": {
+    "appmetrics-dash": "^3.3.2",
+    "appmetrics-zipkin": "^1.0.4",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "log4js": "^1.1.1"
+  },
+  "devDependencies": {
+    "chai": "^4.0.0",
+    "mocha": "^3.4.2",
+    "nyc": "^10.3.2",
+    "proxyquire": "^1.8.0"
+  }
+}

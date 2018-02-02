@@ -1,0 +1,16 @@
+{
+  "name": "https-example",
+  "version": "1.0.0",
+  "description": "Simple https with appmetrics-zipkin trace example",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "getter": "node https-getter.js &",
+    "pusher": "node https-pusher.js &"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "appmetrics-zipkin": "^1.0.4"
+  }
+}
